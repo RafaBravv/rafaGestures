@@ -8,15 +8,12 @@ export const SCREEN = {
 
 // Configuración de gestos (como ajustar la sensibilidad de un volante)
 export const GESTURE_CONFIG = {
-  // Qué tan lejos debe deslizar para activar (25% del ancho de pantalla)
-  SWIPE_THRESHOLD: SCREEN.WIDTH * 0.25,
-  
+  // Qué tan lejos debe deslizar para activar (30% del ancho de pantalla)
+  SWIPE_THRESHOLD: SCREEN.WIDTH * 0.3,
   // Qué tan rápido debe deslizar
   VELOCITY_THRESHOLD: 0.3,
-  
   // Cuánto rota la card al deslizar (como el ángulo de un columpio)
   ROTATION_MULTIPLIER: 20,
-  
   // Límite máximo de rotación
   MAX_ROTATION: 30,
 };
@@ -38,20 +35,6 @@ export const ANIMATION = {
   },
   SWIPE_DURATION: 300,
   FADE_DURATION: 200,
-};
-
-// Colores del tema
-export const COLORS = {
-  primary: '#4ECDC4',
-  secondary: '#FF6B6B',
-  background: '#f5f5f5',
-  cardBackground: '#ffffff',
-  text: '#333333',
-  textSecondary: '#666666',
-  overlay: 'rgba(0,0,0,0.5)',
-  like: '#4ECDC4',
-  nope: '#FF6B6B',
-  superLike: '#FFD700',
 };
 
 // URLs o configuración de API

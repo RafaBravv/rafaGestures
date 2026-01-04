@@ -8,10 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { GESTURE_CONFIG, SCREEN } from '../constants/config';
 
-/**
- * Hook personalizado para manejar gestos de swipe en las cards
- * VERSIÓN ACTUALIZADA para Reanimated v3+
- */
+// Hook personalizado para manejar gestos de swipe en las cards
 interface GestureCallbacks {
   onSwipeRight: () => void;
   onSwipeLeft: () => void;

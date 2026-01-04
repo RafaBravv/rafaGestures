@@ -1,10 +1,6 @@
-// src/services/ImageService.ts
 import { ImageItem } from '../store/types';
 
-/**
- * Servicio para manejar operaciones con imágenes
- * Piensa en esto como el "bibliotecario" que organiza y gestiona las imágenes
- */
+// ESTA CLASE MANERA LAS OPERACIONES CON LA IMAGENES
 class ImageService {
   /**
    * Genera imágenes de ejemplo (mock data)
@@ -16,9 +12,8 @@ class ImageService {
     for (let i = 1; i <= 20; i++) {
       mockImages.push({
         id: `image_${i}`,
-        uri: `https://picsum.photos/400/600?random=${i}`,
+        uri: `https://picsum.photos/400/600?random=${i}`, // <--- AQUÍ SE OBTIENEN LAS FOTO SPOR AHORA
         title: `Imagen ${i}`,
-        description: `Esta es la descripción de la imagen ${i}`,
         isFavorite: false,
         createdAt: new Date(),
       });
@@ -27,10 +22,7 @@ class ImageService {
     return mockImages;
   }
 
-  /**
-   * Carga imágenes desde una API
-   * IMPLEMENTA ESTO según tu backend
-   */
+  // Carga imágenes desde una API
   static async fetchImagesFromAPI(): Promise<ImageItem[]> {
     try {
       // Ejemplo de llamada a API (descomenta y adapta)
@@ -46,10 +38,7 @@ class ImageService {
     }
   }
 
-  /**
-   * Carga imágenes desde el dispositivo local
-   * USA ESTO si quieres seleccionar fotos del usuario
-   */
+  // (NO IMPLEMENTADO) Carga imágenes desde el dispositivo local
   static async loadLocalImages(): Promise<ImageItem[]> {
     // Implementa usando expo-image-picker o react-native-image-picker
     // import * as ImagePicker from 'expo-image-picker';
@@ -63,9 +52,7 @@ class ImageService {
     return this.getMockImages();
   }
 
-  /**
-   * Transforma datos de API al formato ImageItem
-   */
+  // Transforma datos de API al formato ImageItem
   static transformToImageItem(apiData: any): ImageItem {
     return {
       id: apiData.id || String(Math.random()),
@@ -77,9 +64,7 @@ class ImageService {
     };
   }
 
-  /**
-   * Marca una imagen como favorita
-   */
+  // Marca una imagen como favorita
   static addToFavorites(image: ImageItem): ImageItem {
     return {
       ...image,
@@ -87,9 +72,7 @@ class ImageService {
     };
   }
 
-  /**
-   * Quita una imagen de favoritos
-   */
+  // Quita una imagen de favoritos
   static removeFromFavorites(image: ImageItem): ImageItem {
     return {
       ...image,
@@ -97,16 +80,12 @@ class ImageService {
     };
   }
 
-  /**
-   * Filtra la lista de imágenes eliminando una por ID
-   */
+  // Filtra la lista de imágenes eliminando una por ID
   static removeImage(images: ImageItem[], imageId: string): ImageItem[] {
     return images.filter(img => img.id !== imageId);
   }
 
-  /**
-   * Guarda favoritos en almacenamiento local (AsyncStorage)
-   */
+  // Guarda favoritos en almacenamiento local (AsyncStorage)
   static async saveFavoritesToStorage(favorites: ImageItem[]): Promise<void> {
     try {
       // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -117,9 +96,7 @@ class ImageService {
     }
   }
 
-  /**
-   * Carga favoritos desde almacenamiento local
-   */
+  // Carga favoritos desde almacenamiento local
   static async loadFavoritesFromStorage(): Promise<ImageItem[]> {
     try {
       // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -132,9 +109,7 @@ class ImageService {
     }
   }
 
-  /**
-   * Mezcla el array de imágenes aleatoriamente (como barajar cartas)
-   */
+  // Mezcla el array de imágenes aleatoriamente (como barajar cartas)
   static shuffleImages(images: ImageItem[]): ImageItem[] {
     const shuffled = [...images];
     for (let i = shuffled.length - 1; i > 0; i--) {

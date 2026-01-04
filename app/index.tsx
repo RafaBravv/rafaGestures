@@ -1,12 +1,7 @@
 import React from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { HomeScreen } from '../screens/HomeScreen';
-import { StyleSheet } from 'react-native';
 
-/**
- * Componente raíz de la aplicación
- * IMPORTANTE: GestureHandlerRootView debe envolver toda la app
- */
 export default function Index() {
   const [currentScreen, setCurrentScreen] = React.useState<'home' | 'favorites'>('home');
 
@@ -19,7 +14,8 @@ export default function Index() {
   };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    // GestureHandler debe envolver a toda la APP
+    <GestureHandlerRootView style={{flex: 1}}>
       {currentScreen === 'home' ? (
         <HomeScreen onNavigateToFavorites={navigateToFavorites} />
       ) : (
@@ -29,9 +25,3 @@ export default function Index() {
     </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

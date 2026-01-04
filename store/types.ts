@@ -1,6 +1,4 @@
-/**
- * Representa una imagen individual en la aplicación
- */
+// Representa una imagen individual en la aplicación
 export interface ImageItem {
     id: string;
     uri: string;
@@ -10,9 +8,7 @@ export interface ImageItem {
     createdAt?: Date;
   }
   
-  /**
-   * Estado global de la aplicación
-   */
+  // Estado global de la aplicación
   export interface ImageStore {
     images: ImageItem[];
     favorites: ImageItem[];
@@ -21,9 +17,7 @@ export interface ImageItem {
     error: string | null;
   }
   
-  /**
-   * Acciones para manipular el store
-   */
+  // Acciones para manipular el store
   export interface ImageActions {
     addToFavorites: (image: ImageItem) => void;
     removeFromFavorites: (imageId: string) => void;
@@ -32,23 +26,17 @@ export interface ImageItem {
     loadImages: (images: ImageItem[]) => void;
   }
   
-  /**
-   * Dirección del swipe
-   */
+  // Dirección del swipe
   export type SwipeDirection = 'left' | 'right' | 'up' | 'down';
   
-  /**
-   * Configuración de gestos
-   */
+  // Configuración de gestos
   export interface GestureConfig {
     swipeThreshold: number;
     rotationMultiplier: number;
     velocityThreshold: number;
   }
   
-  /**
-   * Props para componentes
-   */
+  // Props para componentes
   export interface SwipeableCardProps {
     image: ImageItem;
     onSwipeRight: () => void;
