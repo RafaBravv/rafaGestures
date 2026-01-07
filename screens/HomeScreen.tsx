@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, View, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SwipeableCard } from '../components/organisms/SwipeableCard';
 import { Header } from '../components/molecules/Header';
 import { EmptyState } from '../components/molecules/EmptyState';
+import { EmptyCameraState } from '../components/molecules/EmptyCameraState';
+import { CameraActions } from '../components/molecules/CameraActions';
 import { CounterText } from '../components/atoms/CounterText';
 
 import ImageService from '../services/ImageService';
+import CameraService from '../services/CameraService';
 import { ImageItem } from '../store/types';
 
 import { colores, styles } from '../constants/styles';
@@ -20,7 +23,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigateToFavorites })
   const [images, setImages] = useState<ImageItem[]>([]);
   const [favorites, setFavorites] = useState<ImageItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isTakingPhoto, setIsTakingPhoto] = useState(false);
 
   useEffect(() => {
     loadImages();
@@ -35,6 +39,36 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigateToFavorites })
       console.error('Error loading images:', error);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  /**
+   * Toma una foto con la cámara
+   */
+  const handleTakePhoto = async () => {
+    try {
+      setIsTakingPhoto(true);
+      const newImage = await CameraService.takePicture();
+      
+      if (newImage) {
+        // Agregar la nueva imagen al principio del array
+        setImages(prev => ImageService.addImage(prev, newImage));
+        
+        // Si no había imágenes, mostrar la nueva inmediatamente
+        if (images.length === 0) {
+          setCurrentIndex(0);
+        }
+        
+        Alert.alert('¡Éxito!', 'Foto capturada correctamente');
+      }
+    } catch (error) {
+      console.error('Error taking photo:', error);
+      Alert.alert(
+        'Error', 
+        'No se pudo tomar la foto. Verifica los permisos de cámara.'
+      );
+    } finally {
+      setIsTakingPhoto(false);
     }
   };
 
@@ -54,11 +88,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigateToFavorites })
 
   const handleReset = () => {
     setCurrentIndex(0);
-    loadImages();
   };
 
   const currentImage = images[currentIndex];
   const hasMoreImages = currentIndex < images.length;
+  const hasNoImages = images.length === 0;
 
   if (isLoading) {
     return (
@@ -82,7 +116,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigateToFavorites })
       <SafeAreaView style={styles.container}>
         {/* Área de cards */}
         <View style={styles.cardContainer}>
-          {hasMoreImages && currentImage ? (
+          {hasNoImages ? (
+            // Estado inicial sin imágenes
+            <EmptyCameraState onTakePhoto={handleTakePhoto} />
+          ) : hasMoreImages && currentImage ? (
+            // Mostrar card actual
             <SwipeableCard
               key={currentImage.id}
               image={currentImage}
@@ -90,19 +128,28 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ onNavigateToFavorites })
               onSwipeLeft={handleSwipeLeft}
             />
           ) : (
+            // Todas las imágenes revisadas
             <EmptyState onReset={handleReset} />
           )}
         </View>
 
-        {/* Controles y contador */}
-        {hasMoreImages && (
+        {/* Controles de cámara y contador */}
+        {!hasNoImages && (
           <>
-            <View style={styles.counterContainer}>
-              <CounterText 
-                current={currentIndex + 1} 
-                total={images.length} 
-              />
-            </View>
+            {hasMoreImages && (
+              <View style={styles.counterContainer}>
+                <CounterText 
+                  current={currentIndex + 1} 
+                  total={images.length} 
+                />
+              </View>
+            )}
+            
+            {/* Botón de cámara siempre visible */}
+            <CameraActions 
+              onTakePhoto={handleTakePhoto}
+              disabled={isTakingPhoto}
+            />
           </>
         )}
       </SafeAreaView>

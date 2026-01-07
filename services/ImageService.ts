@@ -1,58 +1,25 @@
 import { ImageItem } from '../store/types';
 
-// ESTA CLASE MANERA LAS OPERACIONES CON LA IMAGENES
+// ESTA CLASE MANEJA LAS OPERACIONES CON LAS IMÁGENES
 class ImageService {
   /**
-   * Genera imágenes de ejemplo (mock data)
-   * REEMPLAZA ESTO con tu propia lógica de carga de imágenes
+   * Agrega una nueva imagen a la lista
    */
-  static getMockImages(): ImageItem[] {
-    const mockImages: ImageItem[] = [];
-    
-    for (let i = 1; i <= 20; i++) {
-      mockImages.push({
-        id: `image_${i}`,
-        uri: `https://picsum.photos/400/600?random=${i}`, // <--- AQUÍ SE OBTIENEN LAS FOTO SPOR AHORA
-        title: `Imagen ${i}`,
-        isFavorite: false,
-        createdAt: new Date(),
-      });
-    }
-    
-    return mockImages;
+  static addImage(images: ImageItem[], newImage: ImageItem): ImageItem[] {
+    return [newImage, ...images];
   }
 
-  // Carga imágenes desde una API
+  /**
+   * Carga imágenes desde una API (deshabilitado por ahora)
+   */
   static async fetchImagesFromAPI(): Promise<ImageItem[]> {
-    try {
-      // Ejemplo de llamada a API (descomenta y adapta)
-      // const response = await fetch('https://tu-api.com/images');
-      // const data = await response.json();
-      // return data.map(item => this.transformToImageItem(item));
-      
-      // Por ahora retorna mock data
-      return this.getMockImages();
-    } catch (error) {
-      console.error('Error al cargar imágenes:', error);
-      throw new Error('No se pudieron cargar las imágenes');
-    }
+    // Retorna array vacío - las imágenes vendrán de la cámara
+    return [];
   }
 
-  // (NO IMPLEMENTADO) Carga imágenes desde el dispositivo local
-  static async loadLocalImages(): Promise<ImageItem[]> {
-    // Implementa usando expo-image-picker o react-native-image-picker
-    // import * as ImagePicker from 'expo-image-picker';
-    
-    // const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    // if (status !== 'granted') {
-    //   throw new Error('Permiso denegado');
-    // }
-    
-    // Retorna mock data por ahora
-    return this.getMockImages();
-  }
-
-  // Transforma datos de API al formato ImageItem
+  /**
+   * Transforma datos de API al formato ImageItem
+   */
   static transformToImageItem(apiData: any): ImageItem {
     return {
       id: apiData.id || String(Math.random()),
@@ -64,7 +31,9 @@ class ImageService {
     };
   }
 
-  // Marca una imagen como favorita
+  /**
+   * Marca una imagen como favorita
+   */
   static addToFavorites(image: ImageItem): ImageItem {
     return {
       ...image,
@@ -72,7 +41,9 @@ class ImageService {
     };
   }
 
-  // Quita una imagen de favoritos
+  /**
+   * Quita una imagen de favoritos
+   */
   static removeFromFavorites(image: ImageItem): ImageItem {
     return {
       ...image,
@@ -80,12 +51,16 @@ class ImageService {
     };
   }
 
-  // Filtra la lista de imágenes eliminando una por ID
+  /**
+   * Filtra la lista de imágenes eliminando una por ID
+   */
   static removeImage(images: ImageItem[], imageId: string): ImageItem[] {
     return images.filter(img => img.id !== imageId);
   }
 
-  // Guarda favoritos en almacenamiento local (AsyncStorage)
+  /**
+   * Guarda favoritos en almacenamiento local (AsyncStorage)
+   */
   static async saveFavoritesToStorage(favorites: ImageItem[]): Promise<void> {
     try {
       // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -96,7 +71,9 @@ class ImageService {
     }
   }
 
-  // Carga favoritos desde almacenamiento local
+  /**
+   * Carga favoritos desde almacenamiento local
+   */
   static async loadFavoritesFromStorage(): Promise<ImageItem[]> {
     try {
       // import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -109,7 +86,9 @@ class ImageService {
     }
   }
 
-  // Mezcla el array de imágenes aleatoriamente (como barajar cartas)
+  /**
+   * Mezcla el array de imágenes aleatoriamente (como barajar cartas)
+   */
   static shuffleImages(images: ImageItem[]): ImageItem[] {
     const shuffled = [...images];
     for (let i = shuffled.length - 1; i > 0; i--) {
