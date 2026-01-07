@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, FlatList, StyleSheet, Text } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { GalleryCard } from '../components/organisms/GalleryCard';
 import { FilterTabs, FilterType } from '../components/molecules/FilterTabs';
 import { Header } from '../components/molecules/Header';
 import { ImageItem } from '../store/types';
-import { colores, styles as globalStyles } from '../constants/styles';
+import { styles as globalStyles } from '../constants/styles';
+import { galleryStyles } from '../constants/galleryStyles';
 
 interface GalleryScreenProps {
   images: ImageItem[];
@@ -35,7 +36,7 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({
         onFavoritesPress={onBack}
       />
 
-      <SafeAreaView style={styles.safeArea} edges={['bottom']}>
+      <SafeAreaView style={galleryStyles.safeArea} edges={['bottom']}>
         {/* Tabs de filtro */}
         <FilterTabs
           activeFilter={activeFilter}
@@ -56,15 +57,15 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({
             )}
             keyExtractor={(item) => item.id}
             numColumns={2}
-            contentContainerStyle={styles.gridContainer}
+            contentContainerStyle={galleryStyles.gridContainer}
             showsVerticalScrollIndicator={false}
           />
         ) : (
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyIcon}>
+          <View style={galleryStyles.emptyContainer}>
+            <Text style={galleryStyles.emptyIcon}>
               {activeFilter === 'all' ? '📸' : '⭐'}
             </Text>
-            <Text style={styles.emptyText}>
+            <Text style={galleryStyles.emptyText}>
               {activeFilter === 'all' 
                 ? 'No hay fotos aún' 
                 : 'No tienes favoritas'}
@@ -75,28 +76,3 @@ export const GalleryScreen: React.FC<GalleryScreenProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  gridContainer: {
-    padding: 8,
-    paddingBottom: 20,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 40,
-  },
-  emptyIcon: {
-    fontSize: 80,
-    marginBottom: 20,
-  },
-  emptyText: {
-    fontSize: 18,
-    color: colores.textSecondary,
-    textAlign: 'center',
-  },
-});

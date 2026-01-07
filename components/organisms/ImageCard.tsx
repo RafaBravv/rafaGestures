@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { CardImage } from '../atoms/CardImage';
 import { FavoriteBadge } from '../atoms/FavoriteBadge';
-import { CardOverlay } from '../molecules/CardOverlay';
 import { ImageItem } from '@/store/types';
 import { CARD_CONFIG } from '@/constants/config';
 import { colores } from '@/constants/styles';
@@ -21,9 +20,6 @@ export const ImageCard: React.FC<ImageCardProps> = ({
     <View style={styles.card}>
       {/* Imagen principal - ATOM */}
       <CardImage uri={image.uri} />
-
-      {/* Overlay con información - MOLECULE */}
-      {showOverlay && <CardOverlay title={image.title} />}
 
       {/* Badge de favorito - ATOM */}
       {image.isFavorite && <FavoriteBadge />}

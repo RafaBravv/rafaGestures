@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { CameraButton } from '../atoms/CameraButton';
+import { galleryStyles } from '@/constants/galleryStyles';
 
 interface CameraActionsProps {
   onTakePhoto: () => void;
@@ -12,15 +13,8 @@ export const CameraActions: React.FC<CameraActionsProps> = ({
   disabled 
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={galleryStyles.cameraActionsContainer}>
       <CameraButton onPress={onTakePhoto} disabled={disabled} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    paddingVertical: 20,
-  },
-});

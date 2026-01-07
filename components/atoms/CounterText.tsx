@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { colores } from '@/constants/styles';
+import { Text } from 'react-native';
+import { styles } from '@/constants/styles';
 
 interface CounterTextProps {
   current: number;
@@ -14,11 +14,3 @@ export const CounterText: React.FC<CounterTextProps> = ({ current, total }) => {
     </Text>
   );
 };
-
-const styles = StyleSheet.create({
-  counter: {
-    fontSize: 16,
-    color: colores.textSecondary,
-    fontWeight: '600',
-  },
-});

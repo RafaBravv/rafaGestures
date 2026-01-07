@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { CameraButton } from '../atoms/CameraButton';
 import { GalleryButton } from '../atoms/GalleryButton';
+import { galleryStyles } from '@/constants/galleryStyles';
 
 interface NavigationBarProps {
   onTakePhoto: () => void;
@@ -17,19 +18,9 @@ export const NavigationBar: React.FC<NavigationBarProps> = ({
   disabled 
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={galleryStyles.navigationBar}>
       <GalleryButton onPress={onOpenGallery} photosCount={photosCount} />
       <CameraButton onPress={onTakePhoto} disabled={disabled} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
-    gap: 15,
-  },
-});

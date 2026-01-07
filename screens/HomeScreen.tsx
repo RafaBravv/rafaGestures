@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SwipeableCard } from '../components/organisms/SwipeableCard';
@@ -10,7 +10,7 @@ import { NavigationBar } from '../components/molecules/NavigationBar';
 import { CounterText } from '../components/atoms/CounterText';
 
 import { ImageItem } from '../store/types';
-import { colores, styles } from '../constants/styles';
+import { styles } from '../constants/styles';
 
 interface HomeScreenProps {
   images: ImageItem[];

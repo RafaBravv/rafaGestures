@@ -35,7 +35,6 @@ export const styles = StyleSheet.create({
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      paddingBottom: 15,
       paddingTop: 5,
       borderBottomEndRadius: 30,
       borderBottomStartRadius: 30,
@@ -76,20 +75,19 @@ export const styles = StyleSheet.create({
       transform: [{ scale: 0.95 }],
     },
     
+    // Empty State (completed images)
     emptyState: {
       alignItems: 'center',
       padding: 40,
     },
-    
     emptyIcon: {
       fontSize: 80,
       marginBottom: 20,
     },
-    
     emptyTitle: {
       fontSize: 28,
       fontWeight: 'bold',
-      color: colores.blanco,
+      color: colores.negro,
       marginBottom: 10,
     },
     emptyText: {
@@ -98,7 +96,6 @@ export const styles = StyleSheet.create({
       textAlign: 'center',
       marginBottom: 30,
     },
-    
     resetButton: {
       backgroundColor: colores.agua,
       paddingHorizontal: 30,
@@ -111,38 +108,38 @@ export const styles = StyleSheet.create({
       fontWeight: '600',
     },
     
+    // Empty Camera State (no images)
+    emptyCameraState: {
+      alignItems: 'center',
+      padding: 40,
+      justifyContent: 'center',
+    },
+    emptyCameraIcon: {
+      fontSize: 80,
+      marginBottom: 20,
+    },
+    emptyCameraTitle: {
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: colores.negro,
+      marginBottom: 10,
+    },
+    emptyCameraText: {
+      fontSize: 16,
+      color: colores.textSecondary,
+      textAlign: 'center',
+      marginBottom: 30,
+    },
+    emptyCameraButtonContainer: {
+      marginTop: 10,
+    },
+    
     controls: {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
       paddingVertical: 30,
       gap: 40,
-    },
-    
-    actionButton: {
-      width: 70,
-      height: 70,
-      borderRadius: 35,
-      justifyContent: 'center',
-      alignItems: 'center',
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 0,
-      },
-      shadowOpacity: 0.3,
-      shadowRadius: 4.65,
-      elevation: 5,
-    },
-    nopeButton: {
-      backgroundColor: colores.negro,
-    },
-    likeButton: {
-      backgroundColor: colores.pink,
-    },
-    actionButtonIcon: {
-      color: colores.blanco,
-      fontSize: 32,
     },
     
     counterContainer: {

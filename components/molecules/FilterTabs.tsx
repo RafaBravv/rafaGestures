@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { colores } from '@/constants/styles';
+import { View, TouchableOpacity, Text } from 'react-native';
+import { buttonStyles } from '@/constants/buttonStyles';
 
 export type FilterType = 'all' | 'favorites';
 
@@ -18,17 +18,17 @@ export const FilterTabs: React.FC<FilterTabsProps> = ({
   favoritesCount,
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={buttonStyles.filterTabContainer}>
       <TouchableOpacity
         style={[
-          styles.tab,
-          activeFilter === 'all' && styles.activeTab,
+          buttonStyles.filterTab,
+          activeFilter === 'all' && buttonStyles.filterTabActive,
         ]}
         onPress={() => onFilterChange('all')}
       >
         <Text style={[
-          styles.tabText,
-          activeFilter === 'all' && styles.activeTabText,
+          buttonStyles.filterTabText,
+          activeFilter === 'all' && buttonStyles.filterTabTextActive,
         ]}>
           Todas ({allCount})
         </Text>
@@ -36,14 +36,14 @@ export const FilterTabs: React.FC<FilterTabsProps> = ({
 
       <TouchableOpacity
         style={[
-          styles.tab,
-          activeFilter === 'favorites' && styles.activeTab,
+          buttonStyles.filterTab,
+          activeFilter === 'favorites' && buttonStyles.filterTabActive,
         ]}
         onPress={() => onFilterChange('favorites')}
       >
         <Text style={[
-          styles.tabText,
-          activeFilter === 'favorites' && styles.activeTabText,
+          buttonStyles.filterTabText,
+          activeFilter === 'favorites' && buttonStyles.filterTabTextActive,
         ]}>
           ⭐ Favoritas ({favoritesCount})
         </Text>
@@ -51,32 +51,3 @@ export const FilterTabs: React.FC<FilterTabsProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    backgroundColor: colores.blanco2,
-    borderRadius: 25,
-    padding: 4,
-    marginHorizontal: 20,
-    marginVertical: 15,
-  },
-  tab: {
-    flex: 1,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    alignItems: 'center',
-  },
-  activeTab: {
-    backgroundColor: colores.negro,
-  },
-  tabText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: colores.textSecondary,
-  },
-  activeTabText: {
-    color: colores.blanco,
-  },
-});
