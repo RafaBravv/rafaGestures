@@ -19,7 +19,7 @@ export const SwipeIndicator: React.FC<SwipeIndicatorProps> = ({ type, style }) =
       ]}
     >
       <Animated.Text style={isLike ? swipeStyles.likeText : swipeStyles.nopeText}>
-        {isLike ? '❤️ LIKE' : '✕ NOPE'}
+        {isLike ? '❤️ LIKE' : '🗑️ DELETE'}
       </Animated.Text>
     </Animated.View>
   );

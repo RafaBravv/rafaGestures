@@ -57,14 +57,11 @@ export default function Index() {
 
   const handleSwipeLeft = () => {
     const currentImage = images[currentIndex];
-    if (currentImage && currentImage.isFavorite) {
-      setImages(prev => prev.map(img => 
-        img.id === currentImage.id 
-          ? ImageService.removeFromFavorites(img)
-          : img
-      ));
+    if (currentImage) {
+      // Eliminar la imagen del array
+      setImages(prev => ImageService.removeImage(prev, currentImage.id));
+      // No incrementar el índice porque el array se acorta
     }
-    setCurrentIndex(prev => prev + 1);
   };
 
   const handleReset = () => {
